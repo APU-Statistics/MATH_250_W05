@@ -1,0 +1,123 @@
+---
+title: "Importing & Cleaning"
+subtitle: "due Thursday, September 22 at 4:20pm"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    number_section: false
+    highlight: tango
+    theme: "cosmo"
+link-citations: yes
+editor: visual
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+```{r load-pkg, message = FALSE}
+library(tidyverse)
+```
+
+# Exercises
+
+## Exercise 1
+
+Write a line of code to read in the `hotels.csv` dataset from the `data` folder in your project directory.
+
+```{r load-data, message = FALSE}
+
+```
+
+## Exercise 2
+
+Remove `eval = FALSE`, knit the document, and view the following visualization.
+
+```{r plot, fig.width=10, eval = FALSE}
+hotels %>%
+  group_by(hotel, arrival_date_month) %>%   # group by hotel type and arrival month
+  summarise(mean_adr = mean(adr)) %>%       # calculate mean adr for each group
+  ggplot(aes(
+    x = arrival_date_month,                 # x-axis = arrival_date_month
+    y = mean_adr,                           # y-axis = mean_adr calculated above
+    group = hotel,                          # group lines by hotel type
+    color = hotel)                          # and color by hotel type
+    ) +
+  geom_line() +                             # use lines to represent data
+  theme_minimal() +                         # use a minimal theme
+  labs(x = "Arrival month",                 # customize labels
+       y = "Mean ADR (average daily rate)",
+       title = "Comparison of resort and city hotel prices across months",
+       subtitle = "Resort hotel prices soar in the summer while ciry hotel prices remain relatively constant throughout the year",
+       color = "Hotel type")
+```
+
+How are the months ordered?
+
+> YOUR ANSWER HERE
+
+What would be a better order?
+
+> YOUR ANSWER HERE
+
+Reorder the months on the x-axis (levels of `arrival_date_month`) in a way that makes more sense.
+You will want to use a function from the **forcats** package, see <https://forcats.tidyverse.org/reference/index.html> for inspiration and help.
+
+```{r label-me-1}
+# add code for reordering the months
+```
+
+## Exercise 3
+
+Use the `hotels` dataset to create two separate dataframes, one for City Hotels and one for Resort Hotels.
+
+```{r label-me-2}
+# add code for s
+```
+
+Write these two dataframes to new csv files. Place them in the data folder in your project directory.
+
+```{r label-me-3}
+# add code for writing out the two data frames here
+```
+
+## Exercise 4
+
+Read in the Excel file called `sales.xlsx` from the `data/` folder such that it looks like the following. Note you may need to load a new package - you should add this to the `load-pkg` code chunk at the top of the document. 
+
+```{r echo=FALSE, out.width="20%"}
+knitr::include_graphics("images/sales-1.png")
+```
+
+```{r label-me-4}
+
+```
+
+# Stretch Goals
+
+If you finish the above exercises before time is up, try out the following two stretch goals.
+
+1. Manipulate the sales data in Exercise 4 such such that it looks like the following.
+
+```{r echo=FALSE, out.width="25%"}
+knitr::include_graphics("images/sales-2.png")
+```
+
+```{r label-me-5}
+
+```
+
+2. Recreate the plot from Exercise 2 but change the y-axis label so the values are shown with dollar signs, e.g. $80 instead of 80.
+You will want to use a function from the **scales** package, see <https://scales.r-lib.org/reference/index.html> for inspiration and help.
+
+```{r label-me-6}
+
+```
+
+# Submission
+
+To submit, you need to export your .html document from RStudio Cloud and then upload it to the AE 05 assignment on Canvas. Refer back to [Lab 01](https://kgfitzgerald.github.io/APU_MATH_250/labs/lab-01-hello-r.html) for detailed instructions on how to export and submit your assignment. 
+
+# Grading (10 pts)
+ 
+Application exercises are graded on completion. You will receive full credit if you turn in the .html on time and a reasonable attempt was made on each exercise. 
